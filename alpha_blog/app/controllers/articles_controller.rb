@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   # GET /articles/new
@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   # POST /articles
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   def create
     # debugger
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
