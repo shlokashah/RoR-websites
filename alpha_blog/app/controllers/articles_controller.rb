@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page],per_page: 5)
   end
 
   # GET /articles/1
@@ -26,8 +26,9 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
+    # debugger
     @article = Article.new(article_params)
-
+    @article.user = User.first
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
